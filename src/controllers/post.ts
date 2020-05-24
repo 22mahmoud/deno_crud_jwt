@@ -1,6 +1,11 @@
-import { RouterContext, uuid } from "../../deps.ts";
+import { RouterContext, uuid, yup } from "../../deps.ts";
 import { IPost } from "../types.ts";
 import { Post } from "../models/post.ts";
+
+const createPostSchema = yup.object({
+  title: yup.string().required(),
+  body: yup.string().required()
+});
 
 export async function getPosts(ctx: RouterContext) {
   try {
@@ -44,6 +49,7 @@ export async function createPost(ctx: RouterContext) {
     }
     const body = await request.body();
     const data: Omit<IPost, "id" | "user"> = body.value;
+    await createPostSchema.validate(data);
     const postId = uuid.generate();
 
     const post = await Post.insert({ ...data, id: postId, userId: user.id });

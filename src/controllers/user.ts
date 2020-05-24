@@ -1,4 +1,4 @@
-import { RouterContext, validateJwt, uuid } from "../../deps.ts";
+import { RouterContext, validateJwt, uuid, yup } from "../../deps.ts";
 import { IUser } from "../types.ts";
 import { User } from "../models/user.ts";
 import { generateJwt } from "../helpers.ts";
@@ -12,11 +12,31 @@ export async function hello(ctx: RouterContext) {
   };
 }
 
+const signupSchema = yup.object({
+  email: yup
+    .string()
+    .email()
+    .required(),
+  password: yup.string().required(),
+  name: yup.string().required()
+});
+
+const loginSchema = yup.object({
+  email: yup
+    .string()
+    .email()
+    .required(),
+  password: yup.string().required()
+});
+
 export async function signup(ctx: RouterContext) {
   const { request, response } = ctx;
   try {
     const body = await request.body();
+
     const data: Omit<IUser, "id"> = body.value;
+    await signupSchema.validate(data);
+
     const userId = uuid.generate();
 
     // check if the user with this email already registerd
@@ -45,6 +65,7 @@ export async function login(ctx: RouterContext) {
   try {
     const body = await request.body();
     const data: Omit<IUser, "id" | "name"> = body.value;
+    await loginSchema.validate(data);
 
     const user = await User.comparePassword(data.email, data.password);
     if (!user) {

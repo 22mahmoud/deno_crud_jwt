@@ -8,9 +8,10 @@ A simple boilerplate for Deno CRUD Api, with jwt authentication.
 - [x] [Oak](https://github.com/oakserver/oak) framework.
 - [x] [deno-postgres](https://github.com/buildondata/deno-postgres) as postgres deriver
 - [x] [jwt](https://github.com/timonson/djwt) and [deno-bcrypt](https://github.com/JamesBroadberry/deno-bcrypt) for authentication.
-- [ ] handle all errors
+- [x] handle all errors
+- [x] using [yup](https://github.com/jquense/yup) for body data validation using [pika.dev](https://www.pika.dev/)
 - [ ] tests
-- [x] deno-nessie for database migrations.
+- [x] [deno-nessie](https://github.com/halvardssm/deno-nessie) for database migrations.
 - [ ] Docker
 - [ ] github actions (CI)
 

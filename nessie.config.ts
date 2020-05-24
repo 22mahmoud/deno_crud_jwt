@@ -1,12 +1,8 @@
+import { config } from "./src/config.ts";
+
 const configPg = {
   migrationFolder: `./migrations`,
-  connection: {
-    database: "deno_crud",
-    hostname: "localhost",
-    port: 5432,
-    user: "ashraf",
-    password: "root"
-  },
+  connection: config.dbConfig,
   dialect: "pg"
 };
 

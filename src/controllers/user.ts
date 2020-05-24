@@ -3,6 +3,7 @@ import { IUser } from "../types.ts";
 import { User } from "../models/user.ts";
 import { generateJwt } from "../helpers.ts";
 import { config } from "../config.ts";
+import { uuid } from "../deps.ts";
 
 export async function hello(ctx: RouterContext) {
   const { response } = ctx;
@@ -17,6 +18,7 @@ export async function signup(ctx: RouterContext) {
   try {
     const body = await request.body();
     const data: Omit<IUser, "id"> = body.value;
+    const userId = uuid.generate();
 
     // check if the user with this email already registerd
     const user = await User.findOneByEmail(data.email);
@@ -28,7 +30,7 @@ export async function signup(ctx: RouterContext) {
       return;
     }
 
-    const { id } = await User.insert(data);
+    const { id } = await User.insert({ ...data, id: userId });
     const jwt = generateJwt(id);
     response.status = 201;
     response.body = {

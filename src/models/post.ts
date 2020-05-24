@@ -10,15 +10,15 @@ class PostModel {
   }
 
   async insert(
-    data: Omit<IPost, "id" | "user"> & { userId: string }
+    data: Omit<IPost, "user"> & { userId: string }
   ): Promise<Omit<IPost, "user"> | null> {
     try {
       await this.dbClient.connect();
       const text =
-        "insert into posts (title, body, user_id) values ($1, $2, $3) returning id, title, body";
+        "insert into posts (id, title, body, user_id) values ($1, $2, $3, $4) returning id, title, body";
       const result = await this.dbClient.query({
         text,
-        args: [data.title, data.body, data.userId]
+        args: [data.id, data.title, data.body, data.userId]
       });
       await this.dbClient.end();
 
@@ -32,7 +32,7 @@ class PostModel {
     try {
       await this.dbClient.connect();
       const text = "delete from posts where posts.id = $1";
-      const result = await this.dbClient.query({
+      await this.dbClient.query({
         text,
         args: [id]
       });

@@ -13,7 +13,7 @@ class UserModel {
     return bcrypt.hashpw(password);
   }
 
-  private beforeInsert(data: Omit<IUser, "id">): Omit<IUser, "id"> {
+  private beforeInsert(data: IUser): IUser {
     const hashedPassword = this.hashThePassowrd(data.password);
     return {
       ...data,
@@ -21,15 +21,15 @@ class UserModel {
     };
   }
 
-  async insert(args: Omit<IUser, "id">): Promise<{ id: string }> {
+  async insert(args: IUser): Promise<{ id: string }> {
     try {
       await this.dbClient.connect();
       const data = this.beforeInsert(args);
       const text =
-        "insert into users (email, password, name) values ($1, $2, $3) returning id";
+        "insert into users (id, email, password, name) values ($1, $2, $3, $4) returning id";
       const result = await this.dbClient.query({
         text,
-        args: [data.email, data.password, data.name]
+        args: [data.id, data.email, data.password, data.name]
       });
       await this.dbClient.end();
       return { id: result.rows[0][0] };

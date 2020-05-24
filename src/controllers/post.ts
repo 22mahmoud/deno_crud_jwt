@@ -1,4 +1,4 @@
-import { RouterContext } from "../deps.ts";
+import { RouterContext, uuid } from "../deps.ts";
 import { IPost } from "../types.ts";
 import { Post } from "../models/post.ts";
 
@@ -44,7 +44,9 @@ export async function createPost(ctx: RouterContext) {
     }
     const body = await request.body();
     const data: Omit<IPost, "id" | "user"> = body.value;
-    const post = await Post.insert({ ...data, userId: user.id });
+    const postId = uuid.generate();
+
+    const post = await Post.insert({ ...data, id: postId, userId: user.id });
     response.status = 201;
     response.body = {
       message: "post created",

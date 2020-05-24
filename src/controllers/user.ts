@@ -36,7 +36,7 @@ export async function signup(ctx: RouterContext) {
       data: jwt
     };
   } catch (error) {
-    console.error(error);
+    throw error;
   }
 }
 
@@ -61,7 +61,7 @@ export async function login(ctx: RouterContext) {
       data: jwt
     };
   } catch (error) {
-    console.error(error);
+    throw error;
   }
 }
 
@@ -101,6 +101,6 @@ export async function me(ctx: RouterContext) {
     response.status = 200;
     response.body = user;
   } catch (error) {
-    console.error(error);
+    throw error;
   }
 }

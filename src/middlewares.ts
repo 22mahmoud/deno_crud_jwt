@@ -29,6 +29,20 @@ export async function handleAuthHeader(
     state.user = user;
     await next();
   } catch (error) {
-    console.error(error);
+    throw error;
+  }
+}
+
+export async function handleErrors(
+  context: Context,
+  next: () => Promise<void>
+) {
+  try {
+    await next();
+  } catch (err) {
+    context.response.status = err.status;
+    const { message = "unkown error", status = 500, stack = null } = err;
+    context.response.body = { message, status, stack };
+    context.response.type = "json";
   }
 }

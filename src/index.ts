@@ -6,7 +6,7 @@ import {
   getPost,
   deletePost
 } from "./controllers/post.ts";
-import { handleAuthHeader } from "./middlewares.ts";
+import { handleAuthHeader, handleErrors } from "./middlewares.ts";
 import { IUser } from "./types.ts";
 
 const router = new Router();
@@ -26,6 +26,7 @@ const app = new Application<{
 }>();
 
 app.use(handleAuthHeader);
+app.use(handleErrors);
 
 app.use(router.routes());
 app.use(router.allowedMethods());

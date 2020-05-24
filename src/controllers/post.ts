@@ -11,7 +11,7 @@ export async function getPosts(ctx: RouterContext) {
       data: posts
     };
   } catch (error) {
-    console.error(error);
+    throw error;
   }
 }
 
@@ -24,7 +24,7 @@ export async function getPost(ctx: RouterContext) {
       data: post
     };
   } catch (error) {
-    console.error(error);
+    throw error;
   }
 }
 
@@ -53,7 +53,7 @@ export async function createPost(ctx: RouterContext) {
       data: post
     };
   } catch (error) {
-    console.error(error);
+    throw error;
   }
 }
 
@@ -86,6 +86,6 @@ export async function deletePost(ctx: RouterContext) {
       message: "post deleted"
     };
   } catch (error) {
-    console.error(error);
+    throw error;
   }
 }

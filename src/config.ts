@@ -1,5 +1,8 @@
+import "https://deno.land/x/dotenv/load.ts";
 import { Config } from "./types.ts";
-import { ConnectionOptions } from "../deps.ts";
+import { ConnectionOptions, envConfig } from "../deps.ts";
+
+envConfig();
 
 const dbConfig: ConnectionOptions = {
   hostname: Deno.env.get("DB_HOST"),

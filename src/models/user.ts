@@ -9,12 +9,12 @@ class UserModel {
     this.dbClient = dbClient;
   }
 
-  private hashThePassowrd(password: string): string {
-    return bcrypt.hashpw(password);
+  private async hashThePassowrd(password: string): Promise<string> {
+    return await bcrypt.hash(password);
   }
 
-  private beforeInsert(data: IUser): IUser {
-    const hashedPassword = this.hashThePassowrd(data.password);
+  private async beforeInsert(data: IUser): Promise<IUser> {
+    const hashedPassword = await this.hashThePassowrd(data.password);
     return {
       ...data,
       password: hashedPassword
@@ -24,7 +24,7 @@ class UserModel {
   async insert(args: IUser): Promise<{ id: string }> {
     try {
       await this.dbClient.connect();
-      const data = this.beforeInsert(args);
+      const data = await this.beforeInsert(args);
       const text =
         "insert into users (id, email, password, name) values ($1, $2, $3, $4) returning id";
       const result = await this.dbClient.query({
@@ -91,7 +91,7 @@ class UserModel {
       const [user] = await this.get("email", email);
       if (!user) return null;
 
-      const result = bcrypt.checkpw(password, user.password);
+      const result = bcrypt.compare(password, user.password);
       if (!result) return null;
 
       return {

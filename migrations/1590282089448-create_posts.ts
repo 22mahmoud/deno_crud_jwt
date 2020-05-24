@@ -1,4 +1,4 @@
-import { Schema } from "https://deno.land/x/nessie/mod.ts";
+import { Schema } from "../deps.ts";
 
 export const up = (schema: Schema): void => {
   schema.create("posts", table => {

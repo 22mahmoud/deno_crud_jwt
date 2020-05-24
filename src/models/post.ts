@@ -1,5 +1,5 @@
 import { IPost, IUser } from "../types.ts";
-import { PostgresClient } from "../deps.ts";
+import { PostgresClient } from "../../deps.ts";
 import { dbClient } from "../db.ts";
 
 class PostModel {

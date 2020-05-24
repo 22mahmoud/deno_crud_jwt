@@ -1,4 +1,4 @@
-import { makeJwt, Jose, Payload } from "./deps.ts";
+import { makeJwt, Jose, Payload } from "../deps.ts";
 import { config } from "./config.ts";
 
 export function generateJwt(id: string) {

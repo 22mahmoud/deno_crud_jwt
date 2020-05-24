@@ -1,4 +1,4 @@
-import { RouterContext, uuid } from "../deps.ts";
+import { RouterContext, uuid } from "../../deps.ts";
 import { IPost } from "../types.ts";
 import { Post } from "../models/post.ts";
 

@@ -18,3 +18,4 @@ export {
 } from "https://deno.land/x/djwt/create.ts";
 export { validateJwt } from "https://deno.land/x/djwt/validate.ts";
 export { v4 as uuid } from "https://deno.land/std/uuid/mod.ts";
+export { Schema } from "https://deno.land/x/nessie/mod.ts";

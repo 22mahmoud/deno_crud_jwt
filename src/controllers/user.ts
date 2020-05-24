@@ -1,9 +1,8 @@
-import { RouterContext, validateJwt } from "../deps.ts";
+import { RouterContext, validateJwt, uuid } from "../../deps.ts";
 import { IUser } from "../types.ts";
 import { User } from "../models/user.ts";
 import { generateJwt } from "../helpers.ts";
 import { config } from "../config.ts";
-import { uuid } from "../deps.ts";
 
 export async function hello(ctx: RouterContext) {
   const { response } = ctx;

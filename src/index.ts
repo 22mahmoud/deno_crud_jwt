@@ -1,4 +1,4 @@
-import { bgGreen, black, Application, Router } from "./deps.ts";
+import { bgGreen, black, Application, Router } from "../deps.ts";
 import { hello, signup, login, me } from "./controllers/user.ts";
 import {
   createPost,

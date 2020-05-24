@@ -1,5 +1,5 @@
 import { IUser } from "../types.ts";
-import { PostgresClient, bcrypt } from "../deps.ts";
+import { PostgresClient, bcrypt } from "../../deps.ts";
 import { dbClient } from "../db.ts";
 
 class UserModel {

@@ -1,4 +1,4 @@
-import { ConnectionOptions } from "./deps.ts";
+import { ConnectionOptions } from "../deps.ts";
 
 export interface Config {
   dbConfig: ConnectionOptions;

@@ -1,4 +1,4 @@
-import { Context, validateJwt } from "./deps.ts";
+import { Context, validateJwt } from "../deps.ts";
 import { IUser } from "./types.ts";
 import { config } from "./config.ts";
 import { User } from "./models/user.ts";

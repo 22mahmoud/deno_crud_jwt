@@ -29,9 +29,15 @@ cd deno_crud_jwt
 cp .env.example .env
 ```
 
-before run the server fill .env valuse.
+before run the server fill .env values.
 
 ```bash
-deno cache src/deps.ts
+# download & cache all deps
+deno cache ./deps.ts
+
+# migrate database after fill your env file
+deno run --allow-net --allow-read --allow-env https://deno.land/x/nessie/cli.ts migrate
+
+# run the server
 deno run --allow-net --allow-env --allow-read src/index.ts
 ```

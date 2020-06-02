@@ -1,9 +1,10 @@
+import { nessieConfig, ClientPostgreSQL } from "./deps.ts";
 import { config } from "./src/config.ts";
 
-const configPg = {
-  migrationFolder: `./migrations`,
-  connection: config.dbConfig,
-  dialect: "pg"
+const configPg: nessieConfig = {
+  client: new ClientPostgreSQL("./migrations", {
+    ...config.dbConfig,
+  }),
 };
 
 export default configPg;

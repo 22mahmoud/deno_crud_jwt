@@ -4,7 +4,7 @@ import {
   createPost,
   getPosts,
   getPost,
-  deletePost
+  deletePost,
 } from "./controllers/post.ts";
 import { handleAuthHeader, handleErrors } from "./middlewares.ts";
 import { IUser } from "./types.ts";

@@ -41,7 +41,7 @@ export async function handleErrors(
     await next();
   } catch (err) {
     context.response.status = err.status;
-    const { message = "unkown error", status = 500, stack = null } = err;
+    const { message = "unknown error", status = 500, stack = null } = err;
     context.response.body = { message, status, stack };
     context.response.type = "json";
   }
